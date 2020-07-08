@@ -176,7 +176,7 @@ def register(data, src_fd):
     USER_FILE.seek(pos, 0)
     salt=create_salt()
     decrypted_pwd=CIPHER.decrypt(base64.b64decode(data['password'].encode("UTF-8")), random_generator)
-    temp = {'user':data['user'], 'password':create_md5(decrypted_pwd, salt), 'time':0,"salt":salt}
+    temp = {'user':data['user'], 'password':create_md5(decrypted_pwd, salt), 'time':0,"salt":salt,'nickname':data['nickname']}
     temp = str(temp)#不用json.dumps的原因是它不能处理byte类型的salt,而这个salt没有办法decode
     USER_FILE.write(temp + '\n')
     USER_FILE.flush()
