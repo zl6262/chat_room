@@ -83,7 +83,9 @@ def do_register():
     password=base64.b64encode(cipher.encrypt(password.encode("UTF-8"))).decode("UTF-8")
     #密钥以及加密后的均是bytes类型 不支持json  只能将其decode成utf-8string类型发送， 而进行加密时 password是
     #string 变量 不能加密 要用encode 转换成bytes类型才能继续  encode 返回bytes
-    data = {'type':1, 'user':user, 'password':password}
+    print("请输入用户昵称")
+    nickname = sys.stdin.readline().strip('\n')
+    data = {'type':1, 'user':user, 'password':password, 'nickname':nickname}
     body = json.dumps(data)
     length = len(body)
     send_data = struct.pack('i', length) + body.encode()
